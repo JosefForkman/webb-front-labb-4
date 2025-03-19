@@ -7,16 +7,28 @@ body {
     font-family: "Poppins", sans-serif;
 }
 
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    justify-content: space-between;
+}
+h1 {
+    font-size: 6rem;
+    text-align: center;
+    margin-bottom: 3rem;
+}
 .canban-bord {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 330px);
     gap: 1rem;
 
     .bord {
         background-color: #efefef;
         padding-inline: 1rem;
         padding-block: 2.4rem;
-        border-radius: 0.25rem;
+        border-radius: 1rem;
 
         h2 {
             justify-self: center;
@@ -32,7 +44,7 @@ body {
             li {
                 background-color: #fff;
                 padding: 0.5rem;
-                border-radius: 0.25rem;
+                border-radius: 0.5rem;
                 list-style: none;
             }
         }
@@ -92,5 +104,22 @@ body {
         background-color: #efefef;
         padding: 0.2em 0.8em;
         border-radius: 0.25em;
+    }
+}
+
+.note-bord {
+    display: flex;
+    flex-direction: column;
+    form {
+        height: 100%;
+        textarea {
+            font-size: 1.5rem;
+            height: 100%;
+            width: 100%;
+            border-radius: 0.25rem;
+            padding: 1em;
+            resize: none;
+            box-sizing: border-box;
+        }
     }
 }
