@@ -1,0 +1,40 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+}
+
+.canban-bord {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+
+    .bord {
+        background-color: #efefef;
+        padding-inline: 1rem;
+        padding-block: 2.4rem;
+        border-radius: 0.25rem;
+
+        h2 {
+            justify-self: center;
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        ul {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            li {
+                background-color: #fff;
+                padding: 0.5rem;
+                border-radius: 0.25rem;
+                list-style: none;
+            }
+        }
+    }
+}
