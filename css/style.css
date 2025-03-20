@@ -21,7 +21,7 @@ h1 {
 }
 .canban-bord {
     display: grid;
-    grid-template-columns: repeat(4, 330px);
+    grid-template-columns: repeat(4, 360px);
     gap: 1rem;
 
     .bord {
@@ -41,44 +41,75 @@ h1 {
             display: flex;
             flex-direction: column;
             gap: 1rem;
+            overflow-y: auto;
+            scroll-snap-type: y mandatory;
+            max-height: 370px;
             li {
                 background-color: #fff;
                 padding: 0.5rem;
                 border-radius: 0.5rem;
                 list-style: none;
+                scroll-snap-align: start;
             }
         }
     }
 }
 
-.links-bord ul li {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    gap: 0.5rem;
-    align-items: center;
+.links-bord {
+    display: flex;
+    flex-direction: column;
+    ul {
+        margin-bottom: 1rem;
+        li {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 0.5rem;
+            align-items: center;
 
-    font-size: 1.4rem;
+            font-size: 1.4rem;
 
-    img {
-        aspect-ratio: 1;
-        width: 64px;
+            img {
+                aspect-ratio: 1;
+                width: 64px;
+            }
+
+            a {
+                text-decoration: none;
+                color: #000;
+            }
+
+            button {
+                align-self: flex-start;
+                font-size: 1rem;
+                color: hsl(0 0% 90% / 1);
+                background-color: transparent;
+                padding: 0;
+                border: 0px;
+                cursor: pointer;
+                
+                &:hover {
+                    color: hsl(0 0% 80%);
+                    background-color: transparent;
+                }
+            }
+        }
     }
-
-    a {
-        text-decoration: none;
-        color: #000;
-    }
-
     button {
-        align-self: flex-start;
-        font-size: 1rem;
-        color: hsl(0 0% 90% / 1);
-        background-color: transparent;
+        display: flex;
+        gap: 0.5em;
+        align-self: center;
+        align-items: center;
+
+        font-size: 1.5rem;
+        color: #fff;
         border: 0px;
+        padding: 0.5em 1em;
+        border-radius: 0.25em;
+        background-color: hsl(0 0% 80%);
         cursor: pointer;
 
         &:hover {
-            color: hsl(0 0% 80%);
+            background-color: hsl(0 0% 70%);
         }
     }
 }
@@ -86,6 +117,7 @@ h1 {
 .wetter-bord ul li {
     display: grid;
     grid-template-columns: auto auto 1fr;
+    grid-template-rows: auto auto;
     column-gap: 1rem;
 
     p {
@@ -93,7 +125,7 @@ h1 {
     }
 
     img {
-        grid-row: 1 / 3;
+        grid-row: 1 / -1;
         aspect-ratio: 1;
         width: 64px;
         margin-right: 0.5rem;
