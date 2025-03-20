@@ -174,12 +174,13 @@ navigator.geolocation.getCurrentPosition(async (position) => {
 
     threeDayForecasts.forEach((day) => {
         const index = Math.floor(day.length / 2);
+        const curentDay = day[index];
         const weather = {
-            name: day[index].dt_txt.split(" ")[0],
-            description: day[index].weather[0].description,
-            day: getDay(new Date(day[index].dt_txt.split(" ")[0])),
-            temp: Math.floor(day[index].main.temp),
-            icon: `http://openweathermap.org/img/wn/${day[index].weather[0].icon}.png`,
+            name: curentDay.dt_txt.split(" ")[0],
+            description: curentDay.weather[0].description,
+            day: getDay(new Date(curentDay.dt_txt.split(" ")[0])),
+            temp: Math.floor(curentDay.main.temp),
+            icon: `http://openweathermap.org/img/wn/${curentDay.weather[0].icon}.png`,
         };
         const weatherElement = document.createElement("li");
         weatherElement.innerHTML = `
