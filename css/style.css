@@ -22,36 +22,38 @@ main {
     flex-direction: column;
     align-items: center;
 
-    .dashboard-name {
-        font-size: 3rem;
-        background-color: transparent;
-        border: 0;
-        margin-bottom: 3rem;
-        cursor: pointer;
-    }
-
-    form {
-        display: none;
-        gap: 1em;
-        margin-bottom: 3rem;
-        input {
+    .dashbord-wrapper {
+        .dashboard-name {
             font-size: 3rem;
-            padding: 0.5em 1em;
-            border-radius: 0.25em;
+            background-color: transparent;
             border: 0;
-        }
-        button {
-            display: inline-block;
-            font-size: 1.5rem;
-            color: #fff;
-            background-color: hsl(0 0% 80%);
-            border: 0;
-            border-radius: 0.25em;
-            padding: 0.5em 1em;
+            margin-bottom: 3rem;
             cursor: pointer;
+        }
 
-            &:hover {
-                background-color: hsl(0 0% 70%);
+        form {
+            display: none;
+            gap: 1em;
+            margin-bottom: 3rem;
+            input {
+                font-size: 3rem;
+                padding: 0.5em 1em;
+                border-radius: 0.25em;
+                border: 0;
+            }
+            button {
+                display: inline-block;
+                font-size: 1.5rem;
+                color: #fff;
+                background-color: hsl(0 0% 80%);
+                border: 0;
+                border-radius: 0.25em;
+                padding: 0.5em 1em;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: hsl(0 0% 70%);
+                }
             }
         }
     }
@@ -136,6 +138,41 @@ main {
                     color: hsl(0 0% 80%);
                     background-color: transparent;
                 }
+            }
+        }
+    }
+    dialog {
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        padding: 2rem;
+        border: 0;
+        border-radius: 0.5rem;
+        box-shadow: 0 0 30px hsl(0 0% 0% / 0.5);
+
+        &::backdrop {
+            background-color: hsl(0 0% 0% / 0.4);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+
+            label {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                font-size: 1.2rem;
+
+            }
+            input {
+                font-size: 1.5rem;
+                padding: 0.5em 1em;
+                border-radius: 0.25em;
+            }
+            button {
+                align-self: flex-start;
             }
         }
     }

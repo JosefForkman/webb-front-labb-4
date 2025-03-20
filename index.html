@@ -42,52 +42,34 @@
                 <div class="canban-bord">
                     <div class="bord links-bord">
                         <h2>Snabblänkar</h2>
-                        <ul>
-                            <li>
-                                <img
-                                    src="https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.google.com/&size=128"
-                                    alt="Google logo" />
-                                <p><a href="http://google.com">Google</a></p>
-                                <button>
-                                    <span class="sr-only">Ta bort</span>
-                                    <i class="fa-solid fa-circle-minus"></i>
-                                </button>
-                            </li>
-                            <li>
-                                <img
-                                    src="https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.notion.com/&size=128"
-                                    alt="Notion logo" />
-                                <p><a href="http://google.com">Notion</a></p>
-                                <button>
-                                    <span class="sr-only">Ta bort</span>
-                                    <i class="fa-solid fa-circle-minus"></i>
-                                </button>
-                            </li>
-                            <li>
-                                <img
-                                    src="https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://slack.com/&size=128"
-                                    alt="Slack logo" />
-                                <p><a href="http://google.com">Slack</a></p>
-                                <button>
-                                    <span class="sr-only">Ta bort</span>
-                                    <i class="fa-solid fa-circle-minus"></i>
-                                </button>
-                            </li>
-                            <li>
-                                <img
-                                    src="https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://chatgpt.com/&size=128"
-                                    alt="Chat GPT logo" />
-                                <p><a href="http://google.com">Chat GPT</a></p>
-                                <button>
-                                    <span class="sr-only">Ta bort</span>
-                                    <i class="fa-solid fa-circle-minus"></i>
-                                </button>
-                            </li>
-                        </ul>
-                        <button>
+                        <ul></ul>
+                        <button class="add-link">
                             <i class="fa-solid fa-circle-plus"></i> Lägg till
                             länk
                         </button>
+
+                        <dialog>
+                            <form method="dialog" class="add-link-form">
+                                <label>
+                                    Titel:
+                                    <input
+                                        type="text"
+                                        name="title"
+                                        required
+                                        minlength="2"
+                                        placeholder="Titel" />
+                                </label>
+                                <label>
+                                    Länk:
+                                    <input
+                                        type="url"
+                                        name="link"
+                                        required
+                                        placeholder="Länk" />
+                                </label>
+                                <button>Lägg till</button>
+                            </form>
+                        </dialog>
                     </div>
                     <div class="bord wetter-bord">
                         <h2>Dagens väder</h2>
