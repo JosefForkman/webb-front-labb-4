@@ -9,6 +9,8 @@ const linksContiner = document.querySelector(".links-bord ul");
 const addLinkButton = document.querySelector(".add-link");
 const addLinkForm = document.querySelector(".add-link-form");
 
+const weatherContiner = document.querySelector(".wetter-bord ul");
+
 /* Local Storage */
 const dashboardData = JSON.parse(localStorage.getItem("dashboardData")) || {
     title: "John Doe Dashboard",
@@ -136,4 +138,58 @@ addLinkForm.addEventListener("submit", (event) => {
     createLinkElement(link);
 
     addLinkForm.reset();
+});
+
+const getDay = (date) => {
+    const days = [
+        "Söndag",
+        "Måndag",
+        "Tisdag",
+        "Onsdag",
+        "Torsdag",
+        "Fredag",
+        "Lördag",
+    ];
+    return days[date.getDay()];
+};
+
+/* wether */
+navigator.geolocation.getCurrentPosition(async (position) => {
+    const curentLocation = position.coords;
+    weatherContiner.innerHTML = "";
+
+    if (!wetherAPIKey) {
+        console.error("No API key for weather found");
+        return;
+    }
+
+    const response = await fetch(
+        `http://api.openweathermap.org/data/2.5/forecast?lat=${curentLocation.latitude}&lon=${curentLocation.longitude}&appid=${wetherAPIKey}&units=metric&lang=sv`,
+    );
+    const data = await response.json();
+
+    const threeDayForecasts = Object.values(
+        Object.groupBy(data.list, ({ dt_txt }) => dt_txt.split(" ")[0]),
+    ).splice(0, 3);
+
+    threeDayForecasts.forEach((day) => {
+        const index = Math.floor(day.length / 2);
+        const weather = {
+            name: day[index].dt_txt.split(" ")[0],
+            description: day[index].weather[0].description,
+            day: getDay(new Date(day[index].dt_txt.split(" ")[0])),
+            temp: Math.floor(day[index].main.temp),
+            icon: `http://openweathermap.org/img/wn/${day[index].weather[0].icon}.png`,
+        };
+        const weatherElement = document.createElement("li");
+        weatherElement.innerHTML = `
+            <img
+            src="${weather.icon}"
+            alt="Google logo" />
+            <p><b>${weather.day}</b></p>
+            <span>${weather.temp}°C</span>
+            <span>${weather.description}</span>
+            `;
+        weatherContiner.appendChild(weatherElement);
+    });
 });
