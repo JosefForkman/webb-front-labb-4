@@ -221,6 +221,29 @@ main {
     }
 }
 
+.pokemon-bord ul li {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 1rem;
+
+    p {
+        grid-column: 2 / -1;
+    }
+
+    img {
+        grid-row: 1 / -1;
+        margin-right: 0.5rem;
+    }
+    span {
+        justify-self: flex-start;
+        align-self: flex-start;
+        background-color: #efefef;
+        padding: 0.2em 0.8em;
+        border-radius: 0.25em;
+    }
+}
+
 .note-bord {
     display: flex;
     flex-direction: column;

@@ -9,7 +9,9 @@ const linksContiner = document.querySelector(".links-bord ul");
 const addLinkButton = document.querySelector(".add-link");
 const addLinkForm = document.querySelector(".add-link-form");
 
-const weatherContiner = document.querySelector(".wetter-bord ul");
+const weatherContainer = document.querySelector(".wetter-bord ul");
+
+const pokemonContainer = document.querySelector(".pokemon-bord ul");
 
 /* Local Storage */
 const dashboardData = JSON.parse(localStorage.getItem("dashboardData")) || {
@@ -156,7 +158,7 @@ const getDay = (date) => {
 /* wether */
 navigator.geolocation.getCurrentPosition(async (position) => {
     const curentLocation = position.coords;
-    weatherContiner.innerHTML = "";
+    weatherContainer.innerHTML = "";
 
     if (!wetherAPIKey) {
         console.error("No API key for weather found");
@@ -191,6 +193,37 @@ navigator.geolocation.getCurrentPosition(async (position) => {
             <span>${weather.temp}°C</span>
             <span>${weather.description}</span>
             `;
-        weatherContiner.appendChild(weatherElement);
+        weatherContainer.appendChild(weatherElement);
     });
 });
+
+/* Pokemon */
+(async function () {
+    const pokemons = [];
+
+    for (let i = 1; i < 11; i++) {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`);
+        const data = await response.json();
+        const attack = data.stats.find((stat) => stat.stat.name === "attack");
+        const hp = data.stats.find((stat) => stat.stat.name === "hp");
+        pokemons.push({
+            name: data.name,
+            image: data.sprites.front_default,
+            attack,
+            hp,
+        });
+    }
+    pokemonContainer.innerHTML = "";
+    pokemons.forEach((pokemon) => {
+        const pokemonElement = document.createElement("li");
+        pokemonElement.innerHTML = `
+        <img
+        src="${pokemon.image}"
+        alt="Google logo" />
+        <p><b>${pokemon.name}</b></p>
+        <span>Attack: ${pokemon.attack.base_stat}</span>
+        <span>HP: ${pokemon.hp.base_stat}</span>
+        `;
+        pokemonContainer.appendChild(pokemonElement);
+    });
+})();
