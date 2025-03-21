@@ -13,6 +13,8 @@ const weatherContainer = document.querySelector(".wetter-bord ul");
 
 const pokemonContainer = document.querySelector(".pokemon-bord ul");
 
+const noteContainer = document.querySelector(".note-bord textarea");
+
 /* Local Storage */
 const dashboardData = JSON.parse(localStorage.getItem("dashboardData")) || {
     title: "John Doe Dashboard",
@@ -227,3 +229,10 @@ navigator.geolocation.getCurrentPosition(async (position) => {
         pokemonContainer.appendChild(pokemonElement);
     });
 })();
+
+/* Note */
+noteContainer.value = dashboardData.note;
+noteContainer.addEventListener("input", (event) => {
+    dashboardData.note = event.target.value;
+    updateDashbordLocalStorge();
+});
