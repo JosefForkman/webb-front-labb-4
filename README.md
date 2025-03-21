@@ -14,6 +14,6 @@ const unsplashAPIKey = "";
 -   [ ] Extra utmaning: Gör så att användaren kan anpassa orten som visas.
 -   [x] Denna del får du fritt bestämma vad den ska innehålla. Det ska dock vara data från ett externt API och exempelvis kan det vara senaste nyheterna eller aktiekurser.
 -   [x] I den här delen ska användaren kunna skriva snabba anteckningar. Tänk en stor textarea bara där det som skrivs sparas hela tiden. Det ska inte finnas flera olika anteckningar utan bara just en yta.
--   [ ] När användaren klickar på denna knapp ska en slumpvald bild från Unsplash API hämtas och läggas in som bakgrund på dashboarden.
+-   [x] När användaren klickar på denna knapp ska en slumpvald bild från Unsplash API hämtas och läggas in som bakgrund på dashboarden.
 
 -   [ ] Extra utmaning: Låt användaren fylla i ett sökord som används för att hitta en bild inom ett specifikt tema i stället.

@@ -5,6 +5,8 @@
 
 body {
     font-family: "Poppins", sans-serif;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 main {
@@ -72,7 +74,8 @@ main {
     gap: 1rem;
 
     .bord {
-        background-color: #efefef;
+        background-color: hsl(0deg 0% 94% / 50%);
+        backdrop-filter: blur(10px);
         padding-inline: 1rem;
         padding-block: 2.4rem;
         border-radius: 1rem;

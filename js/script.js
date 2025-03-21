@@ -15,6 +15,9 @@ const pokemonContainer = document.querySelector(".pokemon-bord ul");
 
 const noteContainer = document.querySelector(".note-bord textarea");
 
+const changeBg = document.querySelector(".change-bg");
+const bgContiner = document.querySelector("body");
+
 /* Local Storage */
 const dashboardData = JSON.parse(localStorage.getItem("dashboardData")) || {
     title: "John Doe Dashboard",
@@ -235,4 +238,15 @@ noteContainer.value = dashboardData.note;
 noteContainer.addEventListener("input", (event) => {
     dashboardData.note = event.target.value;
     updateDashbordLocalStorge();
+});
+
+/* Background */
+changeBg.addEventListener("click", () => {
+    fetch(
+        `https://api.unsplash.com/photos/random?client_id=${unsplashAPIKey}&orientation=landscape`,
+    )
+        .then((response) => response.json())
+        .then((data) => {
+            bgContiner.style.backgroundImage = `url(${data.urls.regular})`;
+        });
 });
