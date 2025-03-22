@@ -70,7 +70,7 @@ main {
 }
 .canban-bord {
     display: grid;
-    grid-template-columns: repeat(4, 360px);
+    grid-template-columns: repeat(4, 24rem);
     gap: 1rem;
 
     .bord {
