@@ -79,6 +79,40 @@
                                 ska visas
                             </li>
                         </ul>
+                        <button class="update-wether">
+                            <i class="fa-solid fa-location-arrow"></i> Uppdatera
+                            plats
+                        </button>
+
+                        <dialog>
+                            <form method="dialog" class="update-wether-form">
+                                <label id="location">
+                                    Plats:
+                                    <input
+                                        type="text"
+                                        name="location"
+                                        minlength="2"
+                                        required
+                                        placeholder="Plats" />
+                                </label>
+                                <label>
+                                    Antal dagar:
+                                    <select name="numberOfDays">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                    </select>
+                                </label>
+                                <label>
+                                    Använd GPS:
+                                    <input type="checkbox" name="isGPS" />
+                                </label>
+                                <button>Uppdatera inställningar</button>
+                            </form>
+                        </dialog>
                     </div>
                     <div class="bord pokemon-bord">
                         <h2>Pokemon</h2>
@@ -103,5 +137,7 @@
         </main>
         <script src="keys.js"></script>
         <script src="js/script.js"></script>
+        <script src="js/JSDoc.js"></script>
+        <script src="js/wether.js"></script>
     </body>
 </html>

@@ -9,8 +9,6 @@ const linksContiner = document.querySelector(".links-bord ul");
 const addLinkButton = document.querySelector(".add-link");
 const addLinkForm = document.querySelector(".add-link-form");
 
-const weatherContainer = document.querySelector(".wetter-bord ul");
-
 const pokemonContainer = document.querySelector(".pokemon-bord ul");
 
 const noteContainer = document.querySelector(".note-bord textarea");
@@ -19,6 +17,10 @@ const changeBg = document.querySelector(".change-bg");
 const bgContiner = document.querySelector("body");
 
 /* Local Storage */
+/**
+ * This is the dashboard data
+ * @type {DashboardData}
+ */
 const dashboardData = JSON.parse(localStorage.getItem("dashboardData")) || {
     title: "John Doe Dashboard",
     Links: [
@@ -47,7 +49,13 @@ const dashboardData = JSON.parse(localStorage.getItem("dashboardData")) || {
                 "https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.ChatGPT.com/&size=128",
         },
     ],
+    wether: {
+        location: { latitude: 0, longitude: 0, name: "" },
+        numberOfDays: 3,
+        isGPS: true,
+    },
     note: "",
+    backgroundImage: "",
 };
 const updateDashbordLocalStorge = () => {
     localStorage.setItem("dashboardData", JSON.stringify(dashboardData));
@@ -72,7 +80,6 @@ setInterval(() => {
 }, 1000 * 60); // update every minute
 
 /* Dashbord */
-
 dashbordTitle.innerText = dashboardData.title;
 dashbordForm.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -93,7 +100,6 @@ dashbordTitle.addEventListener("click", () => {
 });
 
 /* Links */
-
 const createLinkElement = (link) => {
     const linkElement = document.createElement("li");
 
@@ -147,61 +153,6 @@ addLinkForm.addEventListener("submit", (event) => {
     addLinkForm.reset();
 });
 
-const getDay = (date) => {
-    const days = [
-        "Söndag",
-        "Måndag",
-        "Tisdag",
-        "Onsdag",
-        "Torsdag",
-        "Fredag",
-        "Lördag",
-    ];
-    return days[date.getDay()];
-};
-
-/* wether */
-navigator.geolocation.getCurrentPosition(async (position) => {
-    const curentLocation = position.coords;
-    weatherContainer.innerHTML = "";
-
-    if (!wetherAPIKey) {
-        console.error("No API key for weather found");
-        return;
-    }
-
-    const response = await fetch(
-        `http://api.openweathermap.org/data/2.5/forecast?lat=${curentLocation.latitude}&lon=${curentLocation.longitude}&appid=${wetherAPIKey}&units=metric&lang=sv`,
-    );
-    const data = await response.json();
-
-    const threeDayForecasts = Object.values(
-        Object.groupBy(data.list, ({ dt_txt }) => dt_txt.split(" ")[0]),
-    ).splice(0, 3);
-
-    threeDayForecasts.forEach((day) => {
-        const index = Math.floor(day.length / 2);
-        const curentDay = day[index];
-        const weather = {
-            name: curentDay.dt_txt.split(" ")[0],
-            description: curentDay.weather[0].description,
-            day: getDay(new Date(curentDay.dt_txt.split(" ")[0])),
-            temp: Math.floor(curentDay.main.temp),
-            icon: `http://openweathermap.org/img/wn/${curentDay.weather[0].icon}.png`,
-        };
-        const weatherElement = document.createElement("li");
-        weatherElement.innerHTML = `
-            <img
-            src="${weather.icon}"
-            alt="Google logo" />
-            <p><b>${weather.day}</b></p>
-            <span>${weather.temp}°C</span>
-            <span>${weather.description}</span>
-            `;
-        weatherContainer.appendChild(weatherElement);
-    });
-});
-
 /* Pokemon */
 (async function () {
     const pokemons = [];
@@ -241,6 +192,7 @@ noteContainer.addEventListener("input", (event) => {
 });
 
 /* Background */
+bgContiner.style.backgroundImage = `url(${dashboardData.backgroundImage})`;
 changeBg.addEventListener("click", () => {
     fetch(
         `https://api.unsplash.com/photos/random?client_id=${unsplashAPIKey}&orientation=landscape`,
@@ -248,5 +200,7 @@ changeBg.addEventListener("click", () => {
         .then((response) => response.json())
         .then((data) => {
             bgContiner.style.backgroundImage = `url(${data.urls.regular})`;
+            dashboardData.backgroundImage = data.urls.regular;
+            updateDashbordLocalStorge();
         });
 });
