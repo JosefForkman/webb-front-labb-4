@@ -81,8 +81,8 @@ setInterval(() => {
 
 /* Dashbord */
 dashbordTitle.innerText = dashboardData.title;
-dashbordForm.addEventListener("submit", (e) => {
-    e.preventDefault();
+dashbordForm.addEventListener("submit", (event) => {
+    event.preventDefault();
     let title = dashbordForm.querySelector("input").value;
     if (title === "") {
         return;
@@ -100,6 +100,10 @@ dashbordTitle.addEventListener("click", () => {
 });
 
 /* Links */
+/**
+ * Create a link element
+ * @param {Links} link
+ */
 const createLinkElement = (link) => {
     const linkElement = document.createElement("li");
 
@@ -132,7 +136,7 @@ addLinkButton.addEventListener("click", () => {
     addLinkButton.nextElementSibling.showModal();
 });
 
-addLinkForm.addEventListener("submit", (event) => {
+addLinkForm.addEventListener("submit", () => {
     const formData = new FormData(addLinkForm);
     const url = formData.get("link").trim();
     const title = formData.get("title").trim();
@@ -155,22 +159,15 @@ addLinkForm.addEventListener("submit", (event) => {
 
 /* Pokemon */
 (async function () {
-    const pokemons = [];
+    const pokemons = await fetchPokemons();
+    renderPokemonList(pokemons);
+})();
 
-    for (let i = 1; i < 11; i++) {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`);
-        const data = await response.json();
-        const attack = data.stats.find((stat) => stat.stat.name === "attack");
-        const hp = data.stats.find((stat) => stat.stat.name === "hp");
-        console.log(data);
-        
-        pokemons.push({
-            name: data.name,
-            image: data.sprites.front_default,
-            attack,
-            hp,
-        });
-    }
+/**
+ * Renders the list of pokemons to the DOM
+ * @param {Pokemon[]} pokemons
+ */
+function renderPokemonList(pokemons) {
     pokemonContainer.innerHTML = "";
     pokemons.forEach((pokemon) => {
         const pokemonElement = document.createElement("li");
@@ -184,7 +181,29 @@ addLinkForm.addEventListener("submit", (event) => {
         `;
         pokemonContainer.appendChild(pokemonElement);
     });
-})();
+}
+/**
+ * Fetches the first 10 pokemons from the PokeAPI
+ * @returns {Promise<Pokemon[]>}
+ */
+async function fetchPokemons() {
+    const pokemons = [];
+
+    for (let i = 1; i < 11; i++) {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`);
+        const data = await response.json();
+        const attack = data.stats.find((stat) => stat.stat.name === "attack");
+        const hp = data.stats.find((stat) => stat.stat.name === "hp");
+
+        pokemons.push({
+            name: data.name,
+            image: data.sprites.front_default,
+            attack,
+            hp,
+        });
+    }
+    return pokemons;
+}
 
 /* Note */
 noteContainer.value = dashboardData.note;

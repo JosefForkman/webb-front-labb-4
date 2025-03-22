@@ -17,7 +17,7 @@
  * @typedef {Object} DashboardData
  * @property {string} title
  * @property {Links[]} Links
- * @property {Wether} Wether
+ * @property {Wether} wether
  */
 
 /**
@@ -59,4 +59,12 @@
  * @property {number} message
  * @property {number} cnt
  * @property {Forecast[]} list
+ */
+
+/**
+ * @typedef {Object} Pokemon
+ * @property {string} name
+ * @property {string} image
+ * @property {number} attack
+ * @property {number} hp
  */

@@ -4,6 +4,11 @@ const updateWetherForm = document.querySelector(".update-wether-form");
 const GPSCheckbox = updateWetherForm.querySelector("input[name='isGPS']");
 const locationInput = updateWetherForm.querySelector("#location");
 
+/**
+ * Get the day of the week from a date object.
+ * @param {Date} date
+ * @returns {string}
+ */
 const getDay = (date) => {
     const days = [
         "Söndag",
@@ -16,13 +21,16 @@ const getDay = (date) => {
     ];
     return days[date.getDay()];
 };
+
+// Update the weather forecast
+// and render the weather data to the DOM
 const updateWether = async function () {
     const forecastData = await fetchForecast();
     const sortedForecasts = groupAndSortForecasts(forecastData);
     renderWeatherForecasts(sortedForecasts);
 };
+// update wether form with current values
 updateWetherButton.addEventListener("click", () => {
-    // update wether form with current values
     updateWetherButton.nextElementSibling.showModal();
 
     locationInput.children[0].disabled = dashboardData.wether.isGPS;
@@ -34,6 +42,7 @@ updateWetherButton.addEventListener("click", () => {
         dashboardData.wether.isGPS;
 });
 
+// Update the "dashboardData" object when the GPS checkbox is checked or unchecked
 GPSCheckbox.addEventListener("change", (event) => {
     // disable location input if GPS is checked
     locationInput.children[0].disabled = event.target.checked;
@@ -41,6 +50,7 @@ GPSCheckbox.addEventListener("change", (event) => {
     updateDashbordLocalStorge();
 });
 
+// Update the weather location and number of days to show on submit
 updateWetherForm.addEventListener("submit", () => {
     const formData = new FormData(updateWetherForm);
     const location = formData.get("location");
@@ -60,6 +70,8 @@ updateWetherForm.addEventListener("submit", () => {
     updateWether();
 });
 
+// Get the current location of the user
+// and update the weather location
 navigator.geolocation.getCurrentPosition(async (position) => {
     const { latitude, longitude } = position.coords;
 
@@ -103,14 +115,22 @@ function groupAndSortForecasts(forecasts) {
         .splice(0, dashboardData.wether.numberOfDays);
 }
 /**
- *
- * @param {Forecasts} forecasts
+ * Renders the weather forecasts to the DOM.
+ * @param {Array<Array<Forecast>>} forecasts
  */
 function renderWeatherForecasts(forecasts) {
     weatherContainer.innerHTML = "";
 
     forecasts.forEach((day) => {
-        const curentDay = day[0];
+        const weatherElement = document.createElement("li");
+
+        const curentDay = day.at(0);
+        if (!curentDay) {
+            weatherElement.innerText = "Hittade ingen väderdata";
+            weatherContainer.appendChild(weatherElement);
+            return;
+        }
+
         const weather = {
             name: curentDay.dt_txt.split(" ")[0],
             description: curentDay.weather[0].description,
@@ -118,7 +138,7 @@ function renderWeatherForecasts(forecasts) {
             temp: Math.floor(curentDay.main.temp),
             icon: `http://openweathermap.org/img/wn/${curentDay.weather[0].icon}.png`,
         };
-        const weatherElement = document.createElement("li");
+
         weatherElement.innerHTML = `
             <img
             src="${weather.icon}"
