@@ -162,6 +162,8 @@ addLinkForm.addEventListener("submit", (event) => {
         const data = await response.json();
         const attack = data.stats.find((stat) => stat.stat.name === "attack");
         const hp = data.stats.find((stat) => stat.stat.name === "hp");
+        console.log(data);
+        
         pokemons.push({
             name: data.name,
             image: data.sprites.front_default,
@@ -175,7 +177,7 @@ addLinkForm.addEventListener("submit", (event) => {
         pokemonElement.innerHTML = `
         <img
         src="${pokemon.image}"
-        alt="Google logo" />
+        alt=${pokemon.name} />
         <p><b>${pokemon.name}</b></p>
         <span>Attack: ${pokemon.attack.base_stat}</span>
         <span>HP: ${pokemon.hp.base_stat}</span>
