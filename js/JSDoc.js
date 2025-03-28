@@ -18,6 +18,9 @@
  * @property {string} title
  * @property {Links[]} Links
  * @property {Wether} wether
+ * @property {string[]} pokemonLinks
+ * @property {string} note
+ * @property {string} backgroundImage
  */
 
 /**

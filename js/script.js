@@ -52,6 +52,7 @@ const dashboardData = JSON.parse(localStorage.getItem("dashboardData")) || {
         numberOfDays: 3,
         isGPS: true,
     },
+    pokemonLinks: [],
     note: "",
     backgroundImage: "",
 };
