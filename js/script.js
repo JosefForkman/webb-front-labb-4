@@ -9,8 +9,6 @@ const linksContiner = document.querySelector(".links-bord ul");
 const addLinkButton = document.querySelector("#add-link");
 const addLinkForm = document.querySelector(".add-link-form");
 
-const pokemonContainer = document.querySelector(".pokemon-bord ul");
-
 const noteContainer = document.querySelector(".note-bord textarea");
 
 const changeBg = document.querySelector(".change-bg");
@@ -59,6 +57,20 @@ const dashboardData = JSON.parse(localStorage.getItem("dashboardData")) || {
 };
 const updateDashbordLocalStorge = () => {
     localStorage.setItem("dashboardData", JSON.stringify(dashboardData));
+};
+
+/**
+ * Get a number between two numbers
+ * @param {number} min
+ * @param {number} max
+ *
+ * @returns {number}
+ */
+
+const randomNumberMinMax = (min, max) => {
+    let random = Math.floor(Math.random() * max) + min;
+
+    return random > max ? max : random;
 };
 
 /* Date & Time */
@@ -156,54 +168,6 @@ addLinkForm.addEventListener("submit", () => {
 
     addLinkForm.reset();
 });
-
-/* Pokemon */
-(async function () {
-    const pokemons = await fetchPokemons();
-    renderPokemonList(pokemons);
-})();
-
-/**
- * Renders the list of pokemons to the DOM
- * @param {Pokemon[]} pokemons
- */
-function renderPokemonList(pokemons) {
-    pokemonContainer.innerHTML = "";
-    pokemons.forEach((pokemon) => {
-        const pokemonElement = document.createElement("li");
-        pokemonElement.innerHTML = `
-        <img
-        src="${pokemon.image}"
-        alt=${pokemon.name} />
-        <p><b>${pokemon.name}</b></p>
-        <span>Attack: ${pokemon.attack.base_stat}</span>
-        <span>HP: ${pokemon.hp.base_stat}</span>
-        `;
-        pokemonContainer.appendChild(pokemonElement);
-    });
-}
-/**
- * Fetches the first 10 pokemons from the PokeAPI
- * @returns {Promise<Pokemon[]>}
- */
-async function fetchPokemons() {
-    const pokemons = [];
-
-    for (let i = 1; i < 11; i++) {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`);
-        const data = await response.json();
-        const attack = data.stats.find((stat) => stat.stat.name === "attack");
-        const hp = data.stats.find((stat) => stat.stat.name === "hp");
-
-        pokemons.push({
-            name: data.name,
-            image: data.sprites.front_default,
-            attack,
-            hp,
-        });
-    }
-    return pokemons;
-}
 
 /* Note */
 noteContainer.value = dashboardData.note;
