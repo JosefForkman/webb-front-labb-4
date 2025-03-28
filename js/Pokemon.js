@@ -1,16 +1,27 @@
 const pokemonContainer = document.querySelector(".pokemon-bord ul");
+const pokemonButton = document.querySelector(".pokemon-bord button");
 
 (async function () {
-    const links = await getPokemonLinksFormePokeAPI();
+    const links = dashboardData.pokemonLinks.length > 0 ? dashboardData.pokemonLinks : await getPokemonLinksFormePokeAPI();
     const pokemons = await fetchPokemon(links);
     renderPokemonList(pokemons);
 })();
 
+pokemonButton.addEventListener("click", async () => {
+    const links = await getPokemonLinksFormePokeAPI();
+    const pokemons = await fetchPokemon(links);
+    renderPokemonList(pokemons);
+});
+
+/**
+ * Get random pokemon links from the PokeAPI
+ * @param {number} size
+ * @returns {Promise<string[]>}
+ */
 async function getPokemonLinksFormePokeAPI(size = 10) {
     const links = [];
     const responseCount = await fetch("https://pokeapi.co/api/v2/pokemon/");
     const count = (await responseCount.json()).count;
-    console.log(count);
 
     if (!responseCount.ok) {
         return [];
@@ -22,11 +33,14 @@ async function getPokemonLinksFormePokeAPI(size = 10) {
         links.push(`https://pokeapi.co/api/v2/pokemon/${i}`);
     }
 
+    dashboardData.pokemonLinks = links;
+    updateDashbordLocalStorge();
+
     return links;
 }
 
 /**
- * Fetches the first 10 radome pokemon from the PokeAPI
+ * Fetches pokemon from the PokeAPI using the provided links
  * @param {string[]} links
  * @returns {Promise<Pokemon[]>}
  */
