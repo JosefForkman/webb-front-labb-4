@@ -1,5 +1,5 @@
 const weatherContainer = document.querySelector(".wetter-bord ul");
-const updateWetherButton = document.querySelector(".update-wether");
+const updateWetherButton = document.querySelector("#update-wether-button");
 const updateWetherForm = document.querySelector(".update-wether-form");
 const GPSCheckbox = updateWetherForm.querySelector("input[name='isGPS']");
 const locationInput = updateWetherForm.querySelector("#location");

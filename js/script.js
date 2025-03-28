@@ -6,7 +6,7 @@ const dashbordTitle = dashbordWrapper.querySelector(".dashboard-name");
 const dashbordForm = dashbordWrapper.querySelector("form");
 
 const linksContiner = document.querySelector(".links-bord ul");
-const addLinkButton = document.querySelector(".add-link");
+const addLinkButton = document.querySelector("#add-link");
 const addLinkForm = document.querySelector(".add-link-form");
 
 const pokemonContainer = document.querySelector(".pokemon-bord ul");

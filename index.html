@@ -43,7 +43,7 @@
                     <div class="bord links-bord">
                         <h2>Snabblänkar</h2>
                         <ul></ul>
-                        <button class="add-link">
+                        <button class="bord-btn" id="add-link">
                             <i class="fa-solid fa-circle-plus"></i> Lägg till
                             länk
                         </button>
@@ -67,7 +67,7 @@
                                         required
                                         placeholder="Länk" />
                                 </label>
-                                <button>Lägg till</button>
+                                <button class="bord-btn">Lägg till</button>
                             </form>
                         </dialog>
                     </div>
@@ -79,7 +79,7 @@
                                 ska visas
                             </li>
                         </ul>
-                        <button class="update-wether">
+                        <button class="bord-btn" id="update-wether-button">
                             <i class="fa-solid fa-location-arrow"></i> Uppdatera
                             plats
                         </button>
@@ -110,7 +110,7 @@
                                     Använd GPS:
                                     <input type="checkbox" name="isGPS" />
                                 </label>
-                                <button>Uppdatera inställningar</button>
+                                <button class="bord-btn">Uppdatera inställningar</button>
                             </form>
                         </dialog>
                     </div>
@@ -121,6 +121,10 @@
                                 Vi håller på att ladda in en pokemon åt dig.
                             </li>
                         </ul>
+                        <button class="bord-btn">
+                            <i class="fa-solid fa-rotate-right"></i> 10 ny
+                            pokemon
+                        </button>
                     </div>
                     <div class="bord note-bord">
                         <h2>Anteckningar</h2>

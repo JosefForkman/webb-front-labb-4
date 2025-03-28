@@ -183,23 +183,6 @@ main {
             }
         }
     }
-    button {
-        display: flex;
-        gap: 0.5em;
-        align-items: center;
-
-        font-size: 1.5rem;
-        color: #fff;
-        border: 0px;
-        padding: 0.5em 1em;
-        border-radius: 0.25em;
-        background-color: hsl(0 0% 80%);
-        cursor: pointer;
-
-        &:hover {
-            background-color: hsl(0 0% 70%);
-        }
-    }
 }
 
 .wetter-bord {
@@ -271,24 +254,6 @@ main {
             }
         }
     }
-    button {
-        display: flex;
-        gap: 0.5em;
-        align-self: center;
-        align-items: center;
-
-        font-size: 1.5rem;
-        color: #fff;
-        border: 0px;
-        padding: 0.5em 1em;
-        border-radius: 0.25em;
-        background-color: hsl(0 0% 80%);
-        cursor: pointer;
-
-        &:hover {
-            background-color: hsl(0 0% 70%);
-        }
-    }
 }
 
 .pokemon-bord ul li {
@@ -340,4 +305,23 @@ main {
     border: 0;
     border-radius: 0.25em;
     padding: 0.5em 1em;
+}
+
+.bord-btn {
+    display: flex;
+    gap: 0.5em;
+    align-self: center;
+    align-items: center;
+
+    font-size: 1.5rem;
+    color: #fff;
+    border: 0px;
+    padding: 0.5em 1em;
+    border-radius: 0.25em;
+    background-color: hsl(0 0% 80%);
+    cursor: pointer;
+
+    &:hover {
+        background-color: hsl(0 0% 70%);
+    }
 }
